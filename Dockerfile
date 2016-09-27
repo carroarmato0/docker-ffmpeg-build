@@ -161,4 +161,15 @@ make && make install && make distclean;\n \
 hash -r;\n' \
 >> $HOME/build-all.sh; chmod +x $HOME/build-all.sh;
 
-#RUN bash -l -c "source /etc/profile.d/rvm.sh && fpm -s dir -t rpm -n ffmpeg --version $FFMPEG_RELEASE --vendor \"Inuits\" --description \"FFmpeg is a very fast video and audio converter. It can also grab from a live audio/video source. The command line interface is designed to be intuitive, in the sense that ffmpeg tries to figure out all the parameters, when possible. You have usually to give only the target bitrate you want. FFmpeg can also convert from any sample rate to any other, and resize video on the fly with a high quality polyphase filter.\" -m \"Christophe Vanlancker <carroarmato0@inuits.eu>\" -C $HOME/ffmpeg_build/;"
+RUN echo  $'#!/bin/bash\n\n\
+source /etc/profile.d/rvm.sh;\n\
+fpm \\\n\
+-s dir \\\n\
+-t rpm \\\n\
+-n ffmpeg \\\n\
+--version $FFMPEG_RELEASE \\\n\
+--vendor \"Inuits\" \\\n\
+--description \"FFmpeg is a very fast video and audio converter. It can also grab from a live audio/video source. The command line interface is designed to be intuitive, in the sense that ffmpeg tries to figure out all the parameters, when possible. You have usually to give only the target bitrate you want. FFmpeg can also convert from any sample rate to any other, and resize video on the fly with a high quality polyphase filter.\" \\\n\
+-m \"Christophe Vanlancker <carroarmato0@inuits.eu>\" \\\n\
+-C $HOME/ffmpeg_build/";\n'\
+>> $HOME/package-ffmpeg.sh; chmod +x $HOME/package-ffmpeg.sh;
