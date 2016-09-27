@@ -190,16 +190,21 @@ echo "== BUILD FFMPEG =="\n \
 echo "=================="\n \
 cd ~/ffmpeg_sources;\n \
 cd ffmpeg;\n \
-PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure --prefix="$HOME/ffmpeg_build/usr" --extra-cflags="-I$HOME/ffmpeg_build/include" --extra-ldflags="-L$HOME/ffmpeg_build/lib" --bindir="$HOME/bin" --pkg-config-flags="--static"\n \
-  --enable-gpl\n \
-  --enable-nonfree\n \
-  --enable-libfdk-aac\n \
-  --enable-libfreetype\n \
-  --enable-libmp3lame\n \
-  --enable-libopus\n \
-  --enable-libvorbis\n \
-  --enable-libvpx\n \
-  --enable-libx264\n \
+PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig";\n \
+./configure \\\n\
+  --prefix="$HOME/ffmpeg_build/usr" \\\n\
+  --extra-cflags="-I$HOME/ffmpeg_build/include" \\\n\
+  --extra-ldflags="-L$HOME/ffmpeg_build/lib" \\\n\
+  --pkg-config-flags="--static" \\\n\
+  --enable-gpl \\\n\
+  --enable-nonfree \\\n\
+  --enable-libfdk-aac \\\n\
+  --enable-libfreetype \\\n\
+  --enable-libmp3lame \\\n\
+  --enable-libopus \\\n\
+  --enable-libvorbis \\\n\
+  --enable-libvpx \\\n\
+  --enable-libx264 \\\n\
   --enable-libx265;\n \
 make && make install && make distclean;\n \
 hash -r;\n' \
@@ -215,5 +220,6 @@ fpm \\\n\
 --vendor \"Inuits\" \\\n\
 --description \"FFmpeg is a very fast video and audio converter. It can also grab from a live audio/video source. The command line interface is designed to be intuitive, in the sense that ffmpeg tries to figure out all the parameters, when possible. You have usually to give only the target bitrate you want. FFmpeg can also convert from any sample rate to any other, and resize video on the fly with a high quality polyphase filter.\" \\\n\
 -m \"Christophe Vanlancker <carroarmato0@inuits.eu>\" \\\n\
--C $HOME/ffmpeg_build/";\n'\
+--prefix /usr/ \\\n\
+-C $HOME/ffmpeg_build/usr/;\n'\
 >> $HOME/package-ffmpeg.sh; chmod +x $HOME/package-ffmpeg.sh;
