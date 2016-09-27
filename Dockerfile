@@ -101,46 +101,75 @@ RUN cd ~/ffmpeg_sources; \
     git checkout n$FFMPEG_RELEASE;
 
 RUN echo  $'#!/bin/bash\n\n \
+export PATH=$PATH:/usr/local/bin:$HOME/bin;\n \
 # Build nasm\n \
+echo "================"\n \
+echo "== BUILD NASM =="\n \
+echo "================"\n \
 cd ~/nasm_sources;\n \
 ./configure --prefix=/usr;\n \
 make && make install;\n\n \
 # Compile YASM\n \
+echo "================"\n \
+echo "== BUILD YASM =="\n \
+echo "================"\n \
 cd ~/ffmpeg_sources;\n \
 cd yasm;\n \
 autoreconf -fiv;\n \
 ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin";\n \
 make && make install && make distclean;\n\n \
 # Compile libx264\n \
+echo "==================="\n \
+echo "== BUILD libx264 =="\n \
+echo "==================="\n \
 cd ~/ffmpeg_sources;\n \
 cd x264;\n \
 bash -l -c "export PKG_CONFIG_PATH=\"$HOME/ffmpeg_build/lib/pkgconfig\"; ./configure --prefix=\"$HOME/ffmpeg_build\" --bindir=\"$HOME/bin\" --enable-static; make && make install && make distclean;"\n\n \
 # Compile libx265\n \
+echo "==================="\n \
+echo "== BUILD libx265 =="\n \
+echo "==================="\n \
 cd ~/ffmpeg_sources/x265/build/linux;\n \
 cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="$HOME/ffmpeg_build" -DENABLE_SHARED:bool=off ../../source;\n \
 make && make install;\n\n \
 # Compile libfdk_aac\n \
+echo "======================"\n \
+echo "== BUILD libfdk_aac =="\n \
+echo "======================"\n \
 cd ~/ffmpeg_sources;\n \
 cd fdk-aac;\n \
 autoreconf -fiv;\n \
 ./configure --prefix="$HOME/ffmpeg_build" --disable-shared;\n \
 make && make install && make distclean;\n\n \
 # Compile libmp3lame\n \
+echo "======================"\n \
+echo "== BUILD libmp3lame =="\n \
+echo "======================"\n \
+cd ~/ffmpeg_sources;\n \
 cd lame-3.99.5;\n \
 ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --disable-shared --enable-nasm;\n \
 make && make install && make distclean;\n\n \
 # Compile libopus\n \
+echo "==================="\n \
+echo "== BUILD libopus =="\n \
+echo "==================="\n \
 cd ~/ffmpeg_sources;\n \
 cd opus;\n \
 autoreconf -fiv;\n \
 ./configure --prefix="$HOME/ffmpeg_build" --disable-shared;\n \
 make && make install && make distclean;\n\n \
 # Compile libogg\n \
+echo "=================="\n \
+echo "== BUILD libogg =="\n \
+echo "=================="\n \
 cd ~/ffmpeg_sources;\n \
 cd libogg-1.3.2;\n \
 ./configure --prefix="$HOME/ffmpeg_build" --disable-shared;\n \
 make && make install && make distclean;\n\n \
 # Compile libvorbis\n \
+echo "====================="\n \
+echo "== BUILD libvorbis =="\n \
+echo "====================="\n \
 cd ~/ffmpeg_sources;\n \
 cd libvorbis-1.3.5;\n \
 LDFLAGS="-L$HOME/ffmeg_build/lib";\n \
@@ -148,11 +177,17 @@ CPPFLAGS="-I$HOME/ffmpeg_build/include";\n \
 ./configure --prefix="$HOME/ffmpeg_build" --with-ogg="$HOME/ffmpeg_build" --disable-shared;\n \
 make && make install && make distclean;\n\n \
 # Compile libvpx\n \
+echo "=================="\n \
+echo "== BUILD libvpx =="\n \
+echo "=================="\n \
 cd ~/ffmpeg_sources;\n \
 cd libvpx;\n \
 ./configure --prefix="$HOME/ffmpeg_build" --disable-examples --disable-mmx;\n \
 make && make install && make clean;\n\n \
 # Compile FFMPEG\n \
+echo "=================="\n \
+echo "== BUILD FFMPEG =="\n \
+echo "=================="\n \
 cd ~/ffmpeg_sources;\n \
 cd ffmpeg;\n \
 PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure --prefix="$HOME/ffmpeg_build/usr" --extra-cflags="-I$HOME/ffmpeg_build/include" --extra-ldflags="-L$HOME/ffmpeg_build/lib" --bindir="$HOME/bin" --pkg-config-flags="--static"\n \
