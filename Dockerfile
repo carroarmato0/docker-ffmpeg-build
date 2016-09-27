@@ -35,7 +35,9 @@ RUN yum clean all && yum update -y; \
     libtool \
     make \
     mercurial \
-    #nasm \
+    tree \
+    nano \
+    vim \
     pkgconfig \
     zlib-devel \
     rpm-build;
