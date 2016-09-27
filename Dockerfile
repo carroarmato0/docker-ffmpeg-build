@@ -4,7 +4,12 @@ MAINTAINER Christophe Vanlancker <carroarmato0@inuits.eu>
 ENV RUBY_VERSION 1.9.3
 ENV PATH $PATH:/usr/local/bin:$HOME/bin
 ENV PKG_CONFIG_PATH "$HOME/ffmpeg_build/lib/pkgconfig"
-
+ENV NASM_RELEASE 2.12.02
+ENV LAME_SHORT_RELEASE 3.99
+ENV LAME_RELEASE 3.99.5
+ENV LIBOGG_RELEASE 1.3.2
+ENV LIBVORBIS_RELEASE 1.3.5
+ENV LIBVPX_RELEASE 1.6.0
 ENV FFMPEG_RELEASE 3.1.3
 
 RUN yum clean all && yum update -y; \
@@ -43,8 +48,8 @@ RUN bash -l -c "source /etc/profile.d/rvm.sh && gem update --system && gem insta
     # Compile nasm - version of nasm on Centos6 is 2.06, too old to compile libvpx, but should be ok on Centos7
 RUN mkdir ~/nasm_sources; \
     cd ~/nasm_sources; \
-    curl -L -O http://www.nasm.us/pub/nasm/releasebuilds/2.12.02/nasm-2.12.02.tar.xz; \
-    tar -xf nasm-2.12.02.tar.xz --strip-components=1;
+    curl -L -O http://www.nasm.us/pub/nasm/releasebuilds/$NASM_RELEASE/nasm-$NASM_RELEASE.tar.xz; \
+    tar -xf nasm-$NASM_RELEASE.tar.xz --strip-components=1;
 
     # Compile YASM
 RUN cd ~/ffmpeg_sources; \
@@ -64,8 +69,8 @@ RUN cd ~/ffmpeg_sources; \
 
     # Compile libmp3lame
 RUN cd ~/ffmpeg_sources; \
-    curl -L -O http://downloads.sourceforge.net/project/lame/lame/3.99/lame-3.99.5.tar.gz; \
-    tar xzvf lame-3.99.5.tar.gz;
+    curl -L -O http://downloads.sourceforge.net/project/lame/lame/${LAME_SHORT_RELEASE}/lame-${LAME_RELEASE}.tar.gz; \
+    tar xzvf lame-$LAME_RELEASE.tar.gz;
 
     # Compile libopus
 RUN cd ~/ffmpeg_sources; \
@@ -73,17 +78,19 @@ RUN cd ~/ffmpeg_sources; \
 
     # Compile libogg
 RUN cd ~/ffmpeg_sources; \
-    curl -O http://downloads.xiph.org/releases/ogg/libogg-1.3.2.tar.gz; \
-    tar xzvf libogg-1.3.2.tar.gz;
+    curl -O http://downloads.xiph.org/releases/ogg/libogg-$LIBOGG_RELEASE.tar.gz; \
+    tar xzvf libogg-$LIBOGG_RELEASE.tar.gz;
 
     # Compile libvorbis
 RUN cd ~/ffmpeg_sources; \
-    curl -O http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.5.tar.gz; \
-    tar xzvf libvorbis-1.3.5.tar.gz;
+    curl -O http://downloads.xiph.org/releases/vorbis/libvorbis-$LIBVORBIS_RELEASE.tar.gz; \
+    tar xzvf libvorbis-$LIBVORBIS_RELEASE.tar.gz;
 
     # Compile libvpx
 RUN cd ~/ffmpeg_sources; \
-    git clone --depth 1 https://chromium.googlesource.com/webm/libvpx.git;
+    git clone --depth 1 https://chromium.googlesource.com/webm/libvpx.git; \
+    cd libvpx; \
+    git checkout v$LIBVPX_RELEASE;
 
     # Compile FFMPEG
 RUN cd ~/ffmpeg_sources; \
