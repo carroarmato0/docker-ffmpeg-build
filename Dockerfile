@@ -159,7 +159,6 @@ PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure --prefix="$HOME/f
   --enable-libx265;\n \
 make && make install && make distclean;\n \
 hash -r;\n' \
->> build-all.sh; chmod +x build-all.sh;
+>> $HOME/build-all.sh; chmod +x $HOME/build-all.sh;
 
-CMD ./build-all.sh
 #RUN bash -l -c "source /etc/profile.d/rvm.sh && fpm -s dir -t rpm -n ffmpeg --version $FFMPEG_RELEASE --vendor \"Inuits\" --description \"FFmpeg is a very fast video and audio converter. It can also grab from a live audio/video source. The command line interface is designed to be intuitive, in the sense that ffmpeg tries to figure out all the parameters, when possible. You have usually to give only the target bitrate you want. FFmpeg can also convert from any sample rate to any other, and resize video on the fly with a high quality polyphase filter.\" -m \"Christophe Vanlancker <carroarmato0@inuits.eu>\" -C $HOME/ffmpeg_build/;"
