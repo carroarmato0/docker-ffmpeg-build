@@ -1,6 +1,7 @@
 FROM centos:6
 MAINTAINER Christophe Vanlancker <carroarmato0@inuits.eu>
 
+ENV ITERATION 2
 ENV RUBY_VERSION 1.9.3
 ENV PATH $PATH:/usr/local/bin:$HOME/bin
 ENV PKG_CONFIG_PATH "$HOME/ffmpeg_build/lib/pkgconfig"
@@ -193,9 +194,13 @@ cd ffmpeg;\n \
 PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig";\n \
 ./configure \\\n\
   --prefix="$HOME/ffmpeg_build/usr" \\\n\
-  --extra-cflags="-I$HOME/ffmpeg_build/include" \\\n\
+  --extra-cflags="-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -fPIC -I$HOME/ffmpeg_build/include" \\\n\
   --extra-ldflags="-L$HOME/ffmpeg_build/lib" \\\n\
   --pkg-config-flags="--static" \\\n\
+  --enable-runtime-cpudetect \\\n\
+  --enable-postproc \\\n\
+  --enable-avfilter \\\n\
+  --enable-pthreads \\\n\
   --enable-gpl \\\n\
   --enable-nonfree \\\n\
   --enable-libfdk-aac \\\n\
@@ -216,6 +221,7 @@ fpm \\\n\
 -s dir \\\n\
 -t rpm \\\n\
 -n ffmpeg \\\n\
+--iteration $ITERATION \\\n\
 --version $FFMPEG_RELEASE \\\n\
 --vendor \"Inuits\" \\\n\
 --description \"FFmpeg is a very fast video and audio converter. It can also grab from a live audio/video source. The command line interface is designed to be intuitive, in the sense that ffmpeg tries to figure out all the parameters, when possible. You have usually to give only the target bitrate you want. FFmpeg can also convert from any sample rate to any other, and resize video on the fly with a high quality polyphase filter.\" \\\n\
