@@ -1,24 +1,22 @@
-Building
-=====
+# Docker FFPMPEG Build
+
+## Building
 ```
 docker build -t carroarmato0/ffmpeg:v1 .
 ```
 
-Launching the container
-======
+## Launching the container
 ```
 docker run -i -v ${PWD}:/root/workspace -t carroarmato0/ffmpeg:v1 /bin/bash
 ```
 
-Compiling all the libraries and FFMPEG
-======
+## Compiling all the libraries and FFMPEG
 ```
 cd ~
 ./build-all.sh;
 ```
 
-Packaging FFMPEG
-======
+## Packaging FFMPEG
 ```
 cd ~
 ./package-ffmpeg.rpm;
