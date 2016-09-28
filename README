@@ -3,8 +3,23 @@ Building
 ```
 docker build -t carroarmato0/ffmpeg:v1 .
 ```
-Executing
+
+Launching the container
 ======
 ```
 docker run -i -v ${PWD}:/root/workspace -t carroarmato0/ffmpeg:v1 /bin/bash
+```
+
+Compiling all the libraries and FFMPEG
+======
+```
+cd ~
+./build-all.sh;
+```
+
+Packaging FFMPEG
+======
+```
+cd ~
+./package-ffmpeg.rpm;
 ```
