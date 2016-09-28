@@ -1,7 +1,10 @@
 Building
-========
+=====
+```
 docker build -t carroarmato0/ffmpeg:v1 .
-
+```
 Executing
-=========
-docker run carroarmato0/ffmpeg:v1 -v ./workspace:/root
+======
+```
+docker run -i -v ${PWD}:/root/workspace -t carroarmato0/ffmpeg:v1 /bin/bash
+```
