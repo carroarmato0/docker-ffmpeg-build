@@ -221,5 +221,6 @@ fpm \\\n\
 --description \"FFmpeg is a very fast video and audio converter. It can also grab from a live audio/video source. The command line interface is designed to be intuitive, in the sense that ffmpeg tries to figure out all the parameters, when possible. You have usually to give only the target bitrate you want. FFmpeg can also convert from any sample rate to any other, and resize video on the fly with a high quality polyphase filter.\" \\\n\
 -m \"Christophe Vanlancker <carroarmato0@inuits.eu>\" \\\n\
 --prefix /usr/ \\\n\
--C $HOME/ffmpeg_build/usr/;\n'\
+-C $HOME/ffmpeg_build/usr/;\n
+mv *.rpm ./workspace;\n'\
 >> $HOME/package-ffmpeg.sh; chmod +x $HOME/package-ffmpeg.sh;
