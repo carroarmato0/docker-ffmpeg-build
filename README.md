@@ -25,5 +25,5 @@ cd ~
 ## Packaging FFMPEG
 ```
 cd ~
-./package-ffmpeg.rpm;
+./package-ffmpeg.sh;
 ```
