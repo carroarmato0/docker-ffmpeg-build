@@ -19,11 +19,11 @@ docker run -i -v ${PWD}:/root/workspace -t carroarmato0/ffmpeg:v1 /bin/bash
 ## Compiling all the libraries and FFMPEG
 ```
 cd ~
-./build-all.sh;
+./compile.sh;
 ```
 
 ## Packaging FFMPEG
 ```
 cd ~
-./package-ffmpeg.sh;
+./package.sh;
 ```
