@@ -10,6 +10,7 @@ ENV LAME_SHORT_RELEASE 3.99
 ENV LAME_RELEASE 3.99.5
 ENV LIBOGG_RELEASE 1.3.2
 ENV LIBVORBIS_RELEASE 1.3.5
+ENV LIBTHEORA_RELEASE 1.1.1
 ENV LIBVPX_RELEASE 1.6.0
 ENV FFMPEG_RELEASE 3.1.3
 
@@ -88,6 +89,11 @@ RUN cd ~/ffmpeg_sources; \
 RUN cd ~/ffmpeg_sources; \
     curl -O https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-$LIBVORBIS_RELEASE.tar.gz; \
     tar xzvf libvorbis-$LIBVORBIS_RELEASE.tar.gz;
+
+    # Compile libtheora
+RUN cd ~/ffmpeg_sources; \
+    curl -O https://ftp.osuosl.org/pub/xiph/releases/theora/libtheora-$LIBTHEORA_RELEASE.tar.gz; \
+    tar xzvf libtheora-$LIBTHEORA_RELEASE.tar.gz;
 
     # Compile libvpx
 RUN cd ~/ffmpeg_sources; \

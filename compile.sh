@@ -75,6 +75,16 @@ LDFLAGS="-L$HOME/ffmeg_build/lib";
 CPPFLAGS="-I$HOME/ffmpeg_build/include";
 ./configure --prefix="$HOME/ffmpeg_build" --with-ogg="$HOME/ffmpeg_build" --disable-shared;
 make && make install && make distclean;
+# Compile libtheora
+echo "====================="
+echo "== BUILD libtheora =="
+echo "====================="
+cd ~/ffmpeg_sources;
+cd libtheora-1.1.1;
+LDFLAGS="-L$HOME/ffmeg_build/lib";
+CPPFLAGS="-I$HOME/ffmpeg_build/include";
+./configure --prefix="$HOME/ffmpeg_build" --with-ogg="$HOME/ffmpeg_build" --disable-shared;
+make && make install && make distclean;
 # Compile libvpx
 echo "=================="
 echo "== BUILD libvpx =="
@@ -106,6 +116,7 @@ PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig";
   --enable-libmp3lame \
   --enable-libopus \
   --enable-libvorbis \
+  --enable-libtheora \
   --enable-libvpx \
   --enable-libx264 \
   --enable-libx265;
