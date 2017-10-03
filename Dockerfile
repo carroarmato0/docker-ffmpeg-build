@@ -81,12 +81,12 @@ RUN cd ~/ffmpeg_sources; \
 
     # Compile libogg
 RUN cd ~/ffmpeg_sources; \
-    curl -O http://downloads.xiph.org/releases/ogg/libogg-$LIBOGG_RELEASE.tar.gz; \
+    curl -O https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-$LIBOGG_RELEASE.tar.gz; \
     tar xzvf libogg-$LIBOGG_RELEASE.tar.gz;
 
     # Compile libvorbis
 RUN cd ~/ffmpeg_sources; \
-    curl -O http://downloads.xiph.org/releases/vorbis/libvorbis-$LIBVORBIS_RELEASE.tar.gz; \
+    curl -O https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-$LIBVORBIS_RELEASE.tar.gz; \
     tar xzvf libvorbis-$LIBVORBIS_RELEASE.tar.gz;
 
     # Compile libvpx
